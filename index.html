@@ -110,6 +110,11 @@
   footer{margin-top:34px; border-top:1px solid var(--line); padding-top:18px; text-align:center; color:var(--soft); font-size:.8rem}
   footer .f-brand{font-family:var(--serif); font-weight:700; color:var(--ink); font-size:.9rem; letter-spacing:.06em}
 
+  /* 日本語の折り返し改善：行末に1〜2文字だけ残るのを防ぐ */
+  .wrap p, .wrap .flavor, .wrap .why, .wrap .alt-why, .wrap .grind,
+  .wrap .note, .wrap footer, .wrap .setbox p, .wrap .lead{ text-wrap:pretty; }
+  .nb{ white-space:nowrap; }
+
   .hide{display:none}
   :focus-visible{outline:2.5px solid var(--amber); outline-offset:3px; border-radius:10px}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -146,7 +151,7 @@
   <footer>
     <div class="f-brand">366 Coffee Roaster</div>
     手廻し焙煎 ｜ 沖縄<br>
-    ご注文をいただいてから、1つひとつ焙煎してお届けします。
+    ご注文をいただいてから、<br>1つひとつ焙煎してお届けします。
   </footer>
 </div>
 
@@ -322,14 +327,14 @@
       '</div>'+
 
       '<div class="setbox">'+
-        '<p>2種類を飲み比べるなら、<b>「自由に選べる2袋セット」</b>が便利です。<br>単品で買うより<b>おトク</b>にお試しいただけます。</p>'+
+        '<p>2種類を飲み比べるなら、<br><b class="nb">「自由に選べる2袋セット」</b>が便利です。<br>単品で買うより<b>おトク</b>になります。</p>'+
         '<a class="btn" href="'+SHOP+'/items/'+SET_ITEM_ID+'">2袋セットを見る</a>'+
       '</div>'+
 
       '<div class="cta" style="margin-top:16px">'+
         '<button class="btn ghost" type="button" id="again">もう一度診断する</button>'+
       '</div>'+
-      '<p class="note">ご注文後、最長で2週間程度お時間を頂く場合がございます。</p>';
+      '<p class="note">お届けまで、最長2週間ほど<br>お時間をいただく場合がございます。</p>';
 
     $("quiz").classList.add("hide");
     $("result").classList.remove("hide");
