@@ -1,0 +1,336 @@
+<title>あなたに合う一杯は？｜366 Coffee Roaster</title>
+<style>
+  :root{
+    --espresso:#261B11; --paper:#F6F0E6; --ink:#2A2019; --soft:#78685A;
+    --amber:#B0641F; --amber-lt:#D69E60; --cream:#F5EFE4; --line:#DFD5C4;
+    --wash:#F3E8D6;
+    --serif:Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif;
+  }
+  *{box-sizing:border-box}
+  .wrap{
+    font-family:var(--sans); background:var(--paper); color:var(--ink);
+    min-height:100vh; margin:0 auto; max-width:520px; padding:0 18px 56px;
+    line-height:1.7; -webkit-text-size-adjust:100%;
+  }
+  header{text-align:center; padding:34px 0 26px}
+  .bean{display:block; margin:0 auto 12px}
+  .brand{font-family:var(--serif); font-weight:700; font-size:.86rem; letter-spacing:.16em; color:var(--amber); margin:0}
+  .brand-rule{width:56px; height:2px; background:var(--amber); margin:8px auto 0; border-radius:2px}
+  h1{font-size:1.6rem; line-height:1.45; margin:22px 0 8px; text-wrap:balance}
+  .lead{margin:0; color:var(--soft); font-size:.95rem}
+
+  .prog{display:flex; gap:6px; justify-content:center; margin:0 0 26px}
+  .prog i{width:34px; height:4px; border-radius:99px; background:var(--line); transition:background .3s}
+  .prog i.on{background:var(--amber)}
+
+  .q{font-size:1.18rem; font-weight:700; margin:0 0 18px; text-wrap:balance}
+  .qnum{font-family:var(--serif); font-style:italic; color:var(--amber-lt); font-size:.86rem; letter-spacing:.1em; display:block; margin-bottom:6px}
+  .opts{display:grid; gap:11px}
+  .opt{
+    width:100%; text-align:left; font:inherit; color:inherit; cursor:pointer;
+    background:#fff; border:1px solid var(--line); border-radius:14px;
+    padding:16px 17px; transition:border-color .18s, transform .1s, box-shadow .18s;
+    box-shadow:0 1px 2px rgba(38,27,17,.04);
+  }
+  .opt:hover{border-color:var(--amber); box-shadow:0 4px 14px rgba(38,27,17,.08)}
+  .opt:active{transform:scale(.99)}
+  .opt b{display:block; font-size:1.02rem}
+  .opt span{display:block; color:var(--soft); font-size:.86rem; margin-top:3px}
+
+  .btn{
+    display:inline-block; width:100%; text-align:center; cursor:pointer;
+    font:inherit; font-weight:700; border:0; border-radius:99px;
+    background:var(--espresso); color:var(--cream); padding:15px 20px;
+    text-decoration:none; transition:opacity .18s;
+  }
+  .btn:hover{opacity:.88}
+  .btn.amber{background:var(--amber)}
+  .btn.ghost{background:transparent; color:var(--soft); border:1px solid var(--line); font-weight:400}
+  .btn.sm{padding:11px 18px; font-size:.92rem}
+
+  .back{background:none; border:0; color:var(--soft); font:inherit; font-size:.86rem; cursor:pointer; padding:10px 2px; margin-top:14px}
+  .back:hover{color:var(--amber)}
+
+  /* result */
+  .sec-label{
+    font-family:var(--serif); font-style:italic; letter-spacing:.12em;
+    font-size:.78rem; color:var(--amber); margin:30px 0 10px; text-align:center;
+  }
+  .res-head{background:var(--espresso); color:var(--cream); border-radius:18px 18px 0 0; padding:26px 22px 22px; text-align:center}
+  .res-eyebrow{font-family:var(--serif); font-style:italic; letter-spacing:.14em; font-size:.78rem; color:var(--amber-lt); margin:0 0 10px}
+  .res-en{font-family:var(--serif); font-weight:700; font-size:1.85rem; margin:0; line-height:1.15}
+  .res-jp{margin:8px 0 0; color:var(--amber-lt); font-size:.92rem}
+  .res-badge{display:inline-block; margin-top:14px; border:2px solid var(--cream); border-radius:99px; padding:5px 18px; font-weight:700; font-size:.95rem}
+  .res-body{background:#fff; border:1px solid var(--line); border-top:0; border-radius:0 0 18px 18px; padding:24px 22px 26px}
+  .flavor{font-size:1.06rem; font-weight:700; margin:0 0 4px; text-wrap:balance}
+  .why{color:var(--soft); font-size:.9rem; margin:10px 0 0}
+  .radar{display:block; margin:6px auto 2px}
+  .spec{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 0; border-top:1px dashed var(--line); padding-top:16px}
+  .chip{background:var(--wash); border-radius:99px; padding:6px 13px; font-size:.84rem}
+  .chip b{color:var(--amber); font-weight:700}
+  .grind{margin:16px 0 0; background:var(--wash); border-radius:12px; padding:13px 15px; font-size:.9rem}
+  .grind b{color:var(--amber)}
+  .cta{margin-top:20px; display:grid; gap:10px}
+
+  /* second pick */
+  .alt{
+    background:#fff; border:1px solid var(--line); border-radius:16px;
+    padding:18px 20px 20px; box-shadow:0 1px 2px rgba(38,27,17,.04);
+  }
+  .alt-top{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap}
+  .alt-en{font-family:var(--serif); font-weight:700; font-size:1.12rem; margin:0}
+  .alt-badge{background:var(--wash); color:var(--amber); border-radius:99px; padding:3px 11px; font-size:.8rem; font-weight:700}
+  .alt-jp{color:var(--soft); font-size:.84rem; margin:3px 0 0}
+  .alt-flavor{font-weight:700; margin:12px 0 0}
+  .alt-why{color:var(--soft); font-size:.88rem; margin:6px 0 16px}
+
+  .setbox{
+    margin-top:22px; background:var(--wash); border-radius:16px; padding:20px;
+    text-align:center;
+  }
+  .setbox p{margin:0 0 14px; font-size:.94rem}
+  .setbox b{color:var(--amber)}
+
+  .note{font-size:.82rem; color:var(--soft); text-align:center; margin:18px 0 0}
+  footer{margin-top:34px; border-top:1px solid var(--line); padding-top:18px; text-align:center; color:var(--soft); font-size:.8rem}
+  footer .f-brand{font-family:var(--serif); font-weight:700; color:var(--ink); font-size:.9rem; letter-spacing:.06em}
+
+  .hide{display:none}
+  :focus-visible{outline:2.5px solid var(--amber); outline-offset:3px; border-radius:10px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header>
+    <svg class="bean" width="46" height="32" viewBox="0 0 46 32" aria-hidden="true">
+      <ellipse cx="23" cy="16" rx="22" ry="15" fill="#B0641F"/>
+      <path d="M9 16 C16 6, 30 26, 37 16" stroke="#F6F0E6" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+    </svg>
+    <p class="brand">366 COFFEE ROASTER</p>
+    <div class="brand-rule"></div>
+  </header>
+
+  <section id="intro">
+    <h1>3つの質問で、<br>あなたに合う一杯が見つかります</h1>
+    <p class="lead">コーヒーは苦手な味を避けるだけで、ぐっと美味しくなります。初めての方も、どうぞ気軽に。</p>
+    <div class="cta" style="margin-top:26px">
+      <button class="btn" id="start">はじめる（30秒）</button>
+    </div>
+  </section>
+
+  <section id="quiz" class="hide">
+    <div class="prog" id="prog"><i></i><i></i><i></i></div>
+    <p class="q"><span class="qnum" id="qnum">QUESTION 1</span><span id="qtext"></span></p>
+    <div class="opts" id="opts"></div>
+    <button class="back hide" id="back">← ひとつ前にもどる</button>
+  </section>
+
+  <section id="result" class="hide"></section>
+
+  <footer>
+    <div class="f-brand">366 Coffee Roaster</div>
+    手廻し焙煎 ｜ 沖縄<br>
+    ご注文をいただいてから、1つひとつ焙煎してお届けします。
+  </footer>
+</div>
+
+<script>
+(function(){
+  var SHOP = "https://366coffee.theshop.jp";
+  var SET_ITEM_ID = "150239614";
+
+  var BEANS = {
+    "エチオピア":{en:"ETHIOPIA", jp:"エチオピア イルガチェフェ ハルスケ", id:"133093424",
+      taste:{"酸味":4,"甘み":4,"コク":3,"苦味":2,"香り":4},
+      flavor:{"中煎り":"ストーンフルーツの甘さとカカオの余韻","深煎り":"ダークチョコにカシスをひとさじ"}},
+    "ブラジル":{en:"BRAZIL", jp:"ブラジル トロピカルバイーア", id:"144135425",
+      taste:{"酸味":3,"甘み":5,"コク":4,"苦味":2,"香り":4},
+      flavor:{"中煎り":"チェリーと蜂蜜のジューシーな甘さ","深煎り":"チョコレートのリッチなコク"}},
+    "グアテマラ":{en:"GUATEMALA", jp:"グアテマラ フライハーネス", id:"134807001",
+      taste:{"酸味":3,"甘み":4,"コク":3,"苦味":3,"香り":3},
+      flavor:{"中煎り":"柑橘の爽やかさとブラウンシュガーの甘さ","深煎り":"チョコに寄り添うスッキリした苦味"}},
+    "ケニア":{en:"KENYA", jp:"ケニア ニエリ ガチュヤイニ", id:"145260603",
+      taste:{"酸味":4,"甘み":4,"コク":4,"苦味":3,"香り":4},
+      flavor:{"中煎り":"シトラスとベッコウ飴、紅茶のような上品さ","深煎り":"ダークチョコと焦がしキャラメルの余韻"}},
+    "PNG":{en:"PAPUA NEW GUINEA", jp:"パプアニューギニア コルブラン農園", id:"144135416",
+      taste:{"酸味":3,"甘み":4,"コク":3,"苦味":2,"香り":4},
+      flavor:{"中煎り":"オレンジピールとジューシーな甘さ","深煎り":"黒糖のような甘みとフローラルな余韻"}},
+    "コロンビア":{en:"COLOMBIA", jp:"コロンビア シエラネバダ", id:"145260647",
+      taste:{"酸味":3,"甘み":4,"コク":3,"苦味":3,"香り":3},
+      flavor:{"中煎り":"紅茶のような華やかさと飴の甘さ","深煎り":"ダークチョコのコクと力強い甘み"}}
+  };
+  var ADJ = {"中煎り":{"酸味":0,"甘み":0,"コク":0,"苦味":0,"香り":0},
+             "深煎り":{"酸味":-1,"甘み":-1,"コク":1,"苦味":1,"香り":0}};
+  var TEMP = {"中煎り":88, "深煎り":83};
+
+  var QS = [
+    {q:"普段よく飲むコーヒーは？", opts:[
+      {t:"缶コーヒーやインスタント", s:"香ばしくて、しっかりした味が好み", v:"can"},
+      {t:"カフェで飲むブラック", s:"ふだんから豆の違いを楽しんでいる", v:"cafe"},
+      {t:"あまり飲まない／ミルクや砂糖を入れる", s:"苦いのはちょっと苦手かも", v:"mild"}
+    ]},
+    {q:"苦手な味はありますか？", opts:[
+      {t:"酸っぱいのが苦手", s:"すっきりよりコク重視", v:"noacid"},
+      {t:"苦いのが苦手", s:"軽やかで飲みやすいものを", v:"nobitter"},
+      {t:"特にありません", s:"いろいろ試してみたい", v:"any"}
+    ]},
+    {q:"ご自宅にコーヒーミルはありますか？", opts:[
+      {t:"ある", s:"挽きたての香りを楽しめます", v:"mill"},
+      {t:"ない・わからない", s:"こちらで挽いてお届けします", v:"nomill"}
+    ]}
+  ];
+
+  // [メイン産地, メイン焙煎度, 選んだ理由, サブ産地, サブ焙煎度, サブの理由]
+  var MAP = {
+    "can|noacid":   ["グアテマラ","深煎り","缶コーヒーの香ばしさに近い、チョコのような苦味。酸味はほとんど感じません。",
+                     "PNG","深煎り","同じ深煎りでも、黒糖のような甘みで印象がまるで変わります。"],
+    "can|nobitter": ["ブラジル","中煎り","苦味がやわらかく、甘みが主役。しっかりした味が好きな方の“やさしい入口”です。",
+                     "コロンビア","中煎り","紅茶のような華やかさ。甘さの方向性の違いを楽しめます。"],
+    "can|any":      ["グアテマラ","中煎り","柑橘の爽やかさと黒糖のような甘み。バランスがよく、毎日飲んでも飽きません。",
+                     "ブラジル","中煎り","より甘く、まろやか。並べて飲むと違いがはっきり分かります。"],
+    "cafe|noacid":  ["PNG","深煎り","黒糖を思わせる甘みと厚みのあるコク。深煎りでも重すぎません。",
+                     "グアテマラ","深煎り","こちらはチョコに寄り添うスッキリした苦味。深煎りの2つの表情です。"],
+    "cafe|nobitter":["エチオピア","中煎り","果実のような甘さと華やかな香り。苦味がとても穏やかです。",
+                     "ブラジル","中煎り","華やかさに対して、こちらは素直な甘み。対照的で飲み比べ向きです。"],
+    "cafe|any":     ["ケニア","中煎り","紅茶のような上品さとシトラス感。豆の個性を味わいたい方に。",
+                     "エチオピア","中煎り","同じアフリカでも果実感の出方が違います。通好みの組み合わせ。"],
+    "mild|noacid":  ["ブラジル","中煎り","当店でいちばん甘く、酸味がおだやか。コーヒーが苦手な方にも好評です。",
+                     "コロンビア","中煎り","クセがなくバランス型。次の一歩にちょうどよい一杯です。"],
+    "mild|nobitter":["エチオピア","中煎り","フルーツのような甘い香り。「コーヒーってこんな味がするんだ」と驚く一杯。",
+                     "ブラジル","中煎り","驚きの華やかさに対して、こちらは安心感のある甘みです。"],
+    "mild|any":     ["ブラジル","中煎り","チェリーと蜂蜜のような自然な甘み。まずはここから、が間違いありません。",
+                     "グアテマラ","中煎り","少し大人の味わい。慣れてきたらこちらもぜひ。"]
+  };
+
+  var ans = [], step = 0;
+  var $ = function(id){ return document.getElementById(id); };
+  var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
+
+  function renderQ(){
+    var d = QS[step];
+    $("qnum").textContent = "QUESTION " + (step+1);
+    $("qtext").textContent = d.q;
+    [].forEach.call($("prog").children, function(el,i){ el.classList.toggle("on", i<=step); });
+    var box = $("opts"); box.innerHTML = "";
+    d.opts.forEach(function(o){
+      var b = document.createElement("button");
+      b.className = "opt"; b.type = "button";
+      b.innerHTML = "<b></b><span></span>";
+      b.querySelector("b").textContent = o.t;
+      b.querySelector("span").textContent = o.s;
+      b.addEventListener("click", function(){
+        ans[step] = o.v; step++;
+        if(step < QS.length){ renderQ(); } else { showResult(); }
+        window.scrollTo({top:0, behavior:"smooth"});
+      });
+      box.appendChild(b);
+    });
+    $("back").classList.toggle("hide", step===0);
+  }
+
+  function adjTaste(bean, roast){
+    var t = {}, adj = ADJ[roast];
+    Object.keys(bean.taste).forEach(function(k){
+      t[k] = Math.max(1, Math.min(5, bean.taste[k] + (adj[k]||0)));
+    });
+    return t;
+  }
+
+  function radarSVG(taste, color){
+    var keys = Object.keys(taste), n = keys.length, S = 230, C = S/2, R = 74;
+    var pt = function(i, r){
+      var a = (-90 + 360/n*i) * Math.PI/180;
+      return [C + r*Math.cos(a), C + r*Math.sin(a)];
+    };
+    var s = '<svg class="radar" width="'+S+'" height="'+S+'" viewBox="0 0 '+S+' '+S+'" role="img" aria-label="味わいのバランス">';
+    for(var L=1; L<=5; L++){
+      var ring = [];
+      for(var i=0;i<n;i++){ ring.push(pt(i, R*L/5).join(",")); }
+      s += '<polygon points="'+ring.join(" ")+'" fill="none" stroke="#DFD5C4" stroke-width="1"/>';
+    }
+    for(var j=0;j<n;j++){ var p=pt(j,R); s += '<line x1="'+C+'" y1="'+C+'" x2="'+p[0]+'" y2="'+p[1]+'" stroke="#DFD5C4" stroke-width="1"/>'; }
+    var data = [];
+    keys.forEach(function(k,i){ data.push(pt(i, R*taste[k]/5).join(",")); });
+    s += '<polygon points="'+data.join(" ")+'" fill="'+color+'" fill-opacity=".26" stroke="'+color+'" stroke-width="2.2" stroke-linejoin="round"/>';
+    keys.forEach(function(k,i){
+      var p = pt(i, R*taste[k]/5);
+      s += '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.2" fill="'+color+'"/>';
+    });
+    keys.forEach(function(k,i){
+      var p = pt(i, R+22);
+      s += '<text x="'+p[0]+'" y="'+(p[1]+4)+'" text-anchor="middle" font-size="12" fill="#78685A" font-family="system-ui,sans-serif">'+k+'</text>';
+    });
+    return s + "</svg>";
+  }
+
+  function showResult(){
+    var m = MAP[ans[0] + "|" + ans[1]] || ["ブラジル","中煎り","甘みがあって飲みやすい、当店の定番です。","グアテマラ","中煎り","少し大人の味わい。慣れてきたらこちらもぜひ。"];
+    var b1 = BEANS[m[0]], r1 = m[1], why1 = m[2];
+    var b2 = BEANS[m[3]], r2 = m[4], why2 = m[5];
+
+    var grind = ans[2] === "mill"
+      ? ['豆のまま', 'ミルがあるとのことなので、<b>「豆のまま」</b>がおすすめです。淹れる直前に挽くと香りが格段に良くなります。']
+      : ['ペーパーフィルター用', 'ミルがなくても大丈夫です。ご注文時に<b>「ペーパーフィルター用」</b>をお選びいただければ、こちらで挽いてお届けします。'];
+
+    $("result").innerHTML =
+      '<p class="sec-label">RECOMMENDED FOR YOU</p>'+
+      '<div class="res-head">'+
+        '<p class="res-eyebrow">1st CUP</p>'+
+        '<p class="res-en">'+esc(b1.en)+'</p>'+
+        '<p class="res-jp">'+esc(b1.jp)+'</p>'+
+        '<div class="res-badge">'+esc(r1)+'</div>'+
+      '</div>'+
+      '<div class="res-body">'+
+        radarSVG(adjTaste(b1,r1), "#B0641F")+
+        '<p class="flavor">'+esc(b1.flavor[r1])+'</p>'+
+        '<p class="why">'+esc(why1)+'</p>'+
+        '<div class="spec">'+
+          '<span class="chip"><b>内容量</b> 105g</span>'+
+          '<span class="chip"><b>おすすめ湯温</b> '+TEMP[r1]+'℃</span>'+
+          '<span class="chip"><b>豆の状態</b> '+grind[0]+'</span>'+
+        '</div>'+
+        '<p class="grind">'+grind[1]+'</p>'+
+        '<div class="cta"><a class="btn amber" href="'+SHOP+'/items/'+b1.id+'">この豆を見る（ショップへ）</a></div>'+
+      '</div>'+
+
+      '<p class="sec-label">もう一杯えらぶなら</p>'+
+      '<div class="alt">'+
+        '<div class="alt-top">'+
+          '<p class="alt-en">'+esc(b2.en)+'</p>'+
+          '<span class="alt-badge">'+esc(r2)+'</span>'+
+        '</div>'+
+        '<p class="alt-jp">'+esc(b2.jp)+'</p>'+
+        '<p class="alt-flavor">'+esc(b2.flavor[r2])+'</p>'+
+        '<p class="alt-why">'+esc(why2)+'</p>'+
+        '<a class="btn ghost sm" href="'+SHOP+'/items/'+b2.id+'">この豆を見る</a>'+
+      '</div>'+
+
+      '<div class="setbox">'+
+        '<p>2種類を飲み比べるなら、<b>「自由に選べる2袋セット」</b>が便利です。<br>単品で買うより<b>おトク</b>にお試しいただけます。</p>'+
+        '<a class="btn" href="'+SHOP+'/items/'+SET_ITEM_ID+'">2袋セットを見る</a>'+
+      '</div>'+
+
+      '<div class="cta" style="margin-top:16px">'+
+        '<button class="btn ghost" type="button" id="again">もう一度診断する</button>'+
+      '</div>'+
+      '<p class="note">ご注文後、最初の土曜または日曜に焙煎してお届けします。</p>';
+
+    $("quiz").classList.add("hide");
+    $("result").classList.remove("hide");
+    $("again").addEventListener("click", function(){
+      ans = []; step = 0;
+      $("result").classList.add("hide");
+      $("quiz").classList.remove("hide");
+      renderQ(); window.scrollTo({top:0,behavior:"smooth"});
+    });
+  }
+
+  $("start").addEventListener("click", function(){
+    $("intro").classList.add("hide");
+    $("quiz").classList.remove("hide");
+    renderQ();
+  });
+  $("back").addEventListener("click", function(){ if(step>0){ step--; renderQ(); } });
+})();
+</script>
