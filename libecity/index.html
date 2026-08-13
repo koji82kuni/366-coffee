@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="あなたに合う一杯は？｜366 Coffee Roaster">
 <meta property="og:description" content="3つの質問で、あなたに合うコーヒーが見つかります。沖縄の手廻し焙煎 366 Coffee Roaster の無料診断。">
-<meta property="og:url" content="https://koji82kuni.github.io/366-coffee/">
+<meta property="og:url" content="https://koji82kuni.github.io/366-coffee/libecity/">
 <meta property="og:site_name" content="366 Coffee Roaster">
 <meta name="twitter:card" content="summary">
 <title>あなたに合う一杯は？｜366 Coffee Roaster</title>
@@ -150,13 +150,13 @@
 
 <script>
 (function(){
-  var SHOP = "https://366coffee.theshop.jp";
-  var MODE = "base";
+  var SHOP = "https://ichiba.libecity.com";
+  var MODE = "libecity";
   var BEANS = {
  "タイ": {
   "en": "THAILAND",
   "jp": "タイ ドイサケット",
-  "id": "134566950",
+  "id": "01KN1NJS1FJWRGA2PK9VS3EN9A",
   "taste": {
    "酸味": 3,
    "甘み": 3,
@@ -173,7 +173,7 @@
  "グアテマラ": {
   "en": "GUATEMALA",
   "jp": "グアテマラ フライハーネス",
-  "id": "134807001",
+  "id": "01KN1N6S54QBBM2W7N9XB4BDP9",
   "taste": {
    "酸味": 3,
    "甘み": 4,
@@ -190,7 +190,7 @@
  "エチオピア": {
   "en": "ETHIOPIA",
   "jp": "エチオピア イルガチェフェ ハルスケ",
-  "id": "133093424",
+  "id": "01KN1R4CXGJRWJJ1CN6CQN64GP",
   "taste": {
    "酸味": 4,
    "甘み": 4,
@@ -207,7 +207,7 @@
  "ブラジル": {
   "en": "BRAZIL",
   "jp": "ブラジル トロピカルバイーア",
-  "id": "144135425",
+  "id": "01KR7DG0P3G73KQCMQDHAY8077",
   "taste": {
    "酸味": 3,
    "甘み": 5,
@@ -224,7 +224,7 @@
  "PNG": {
   "en": "PAPUA NEW GUINEA",
   "jp": "パプアニューギニア コルブラン農園",
-  "id": "144135416",
+  "id": "01KR7DEACMC4XSMDYPZJ7996SB",
   "taste": {
    "酸味": 3,
    "甘み": 4,
@@ -241,7 +241,7 @@
  "ケニア": {
   "en": "KENYA",
   "jp": "ケニア ニエリ ガチュヤニ",
-  "id": "145260603",
+  "id": "01KRV4RDJ2WBXFBHZ73G413ARM",
   "taste": {
    "酸味": 4,
    "甘み": 4,
@@ -258,7 +258,7 @@
  "コロンビア": {
   "en": "COLOMBIA",
   "jp": "コロンビア シエラネバダ",
-  "id": "145260647",
+  "id": "01KRV4Q7GT27JP00T9YT3G19NT",
   "taste": {
    "酸味": 3,
    "甘み": 4,
@@ -349,11 +349,24 @@
   "赤い実のような果実感。浅煎りならではの明るさを体験できます。"
  ]
 };
-  var SET_ID = "150239614";
+  var SETS = {"teiban": {"id": "01KX8QN0N3WNTNECWSY13PABFG", "name": "定番2袋セット", "price": "¥1,700", "beans": ["タイ", "グアテマラ", "エチオピア"]}, "kodawari": {"id": "01KX877VX3JF69VHK6PBME1R48", "name": "こだわり2袋セット", "price": "¥2,000", "beans": ["コロンビア", "ケニア", "ブラジル", "PNG"]}};
+  function groupOf(n){
+    for(var k in SETS){ if(SETS[k].beans.indexOf(n)>=0) return k; }
+    return null;
+  }
   function setBox(n1, n2){
+    var g1=groupOf(n1), g2=groupOf(n2);
+    if(g1 && g1===g2){
+      var s=SETS[g1];
+      return '<div class="setbox">'+
+        '<p>この2種類は<br><b class="nb">「'+s.name+'」</b>でまとめて選べます。<br>単品で買うより<b>おトク</b>です（'+s.price+'・送料込）。</p>'+
+        '<a class="btn" href="'+SHOP+'/products/'+s.id+'">'+s.name+'を見る</a>'+
+      '</div>';
+    }
     return '<div class="setbox">'+
-      '<p>2種類を飲み比べるなら、<br><b class="nb">「自由に選べる2袋セット」</b>が便利です。<br>単品で買うより<b>おトク</b>になります。</p>'+
-      '<a class="btn" href="'+SHOP+'/items/'+SET_ID+'">2袋セットを見る</a>'+
+      '<p>2種類を飲み比べるなら、<br><b>飲み比べセット</b>もおすすめです。<br>同じセット内の<b>2種</b>をお選びいただけます。</p>'+
+      '<a class="btn" href="'+SHOP+'/products/'+SETS.teiban.id+'">定番2袋セットを見る</a>'+
+      '<a class="btn ghost" href="'+SHOP+'/products/'+SETS.kodawari.id+'">こだわり2袋セットを見る</a>'+
     '</div>';
   }
 
