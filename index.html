@@ -100,11 +100,17 @@
   footer{margin-top:34px; border-top:1px solid var(--line); padding-top:18px; text-align:center; color:var(--soft); font-size:.8rem}
   footer .f-brand{font-family:var(--serif); font-weight:700; color:var(--ink); font-size:.9rem; letter-spacing:.06em}
 
-  /* 日本語の折り返し改善：行末に1〜2文字だけ残るのを防ぐ */
+  /* ── 日本語の改行制御 ──────────────────────────
+     本文には文節の切れ目に <wbr> を仕込んである（BudouXでビルド時に解析）。
+     keep-all で「文節の途中では折り返さない」を宣言し、<wbr> の位置だけで
+     改行させる。これで「カカ／オ」のような単語の分断が起きなくなる。
+     break-word は、1文節が行幅に収まらない極端な場合だけの保険。 */
+  .wrap{ word-break:keep-all; overflow-wrap:break-word; line-break:strict; }
+  /* 行末に1〜2文字だけ残るのを防ぐ */
   .wrap p, .wrap .flavor, .wrap .why, .wrap .alt-why, .wrap .grind,
   .wrap .note, .wrap footer, .wrap .setbox p, .wrap .lead{ text-wrap:pretty; }
-  /* 短文は行を均等に割る（行末に「ます。」だけ残るのを防ぐ） */
-  .wrap .flavor, .wrap .alt-flavor,
+  /* 短文は行数を均等に割る */
+  .wrap h1, .wrap .q, .wrap .flavor, .wrap .alt-flavor,
   .wrap .why, .wrap .alt-why{ text-wrap:balance; }
   .nb{ white-space:nowrap; }
 
@@ -125,8 +131,8 @@
   </header>
 
   <section id="intro">
-    <h1>3つの質問で、<br>あなたに合う一杯が<br>見つかります</h1>
-    <p class="lead">コーヒーは苦手な味を避けるだけで、ぐっと美味しくなります。初めての方も、どうぞ気軽に。</p>
+    <h1>3つの<wbr>質問で、<br>あなたに<wbr>合う<wbr>一杯が<br>見つかります</h1>
+    <p class="lead">コーヒーは<wbr>苦手な<wbr>味を<wbr>避けるだけで、<wbr>ぐっと<wbr>美味しくなります。<wbr>初めての<wbr>方も、<wbr>どうぞ気軽に。</p>
     <div class="cta" style="margin-top:26px">
       <button class="btn" id="start">はじめる（30秒）</button>
     </div>
@@ -143,8 +149,8 @@
 
   <footer>
     <div class="f-brand">366 Coffee Roaster</div>
-    手廻し焙煎 ｜ 沖縄<br>
-    ご注文をいただいてから、<br>1つひとつ焙煎してお届けします。
+    <span class="nb">手廻し焙煎 ｜ 沖縄</span><br>
+    ご注文を<wbr>いただいてから、<br>1つ<wbr>ひとつ<wbr>焙煎してお届けします。
   </footer>
 </div>
 
@@ -165,9 +171,9 @@
    "香り": 3
   },
   "flavor": {
-   "浅煎り": "ハーブとライチ、まとまりのある甘さ",
-   "中煎り": "クリーンで後を引く甘みと明るい酸味",
-   "深煎り": "ウッディな香ばしさとほのかな酸味"
+   "浅煎り": "ハーブと<wbr>ライチ、<wbr>まとまりの<wbr>ある<wbr>甘さ",
+   "中煎り": "クリーンで<wbr>後を<wbr>引く<wbr>甘みと<wbr>明る<wbr>い<wbr>酸味",
+   "深煎り": "ウッディな<wbr>香ばしさと<wbr>ほのかな<wbr>酸味"
   }
  },
  "グアテマラ": {
@@ -182,9 +188,9 @@
    "香り": 3
   },
   "flavor": {
-   "浅煎り": "みかんの明るい酸味とナッツの甘い余韻",
-   "中煎り": "酸味と苦味のバランス、キャラメルの甘さ",
-   "深煎り": "ダークチョコのほろ苦さとすっきりした後味"
+   "浅煎り": "みかんの<wbr>明る<wbr>い<wbr>酸味と<wbr>ナッツの<wbr>甘い<wbr>余韻",
+   "中煎り": "酸味と<wbr>苦味の<wbr>バランス、<wbr>キャラメルの<wbr>甘さ",
+   "深煎り": "ダークチョコの<wbr>ほろ<wbr>苦さと<wbr>すっきりした<wbr>後味"
   }
  },
  "エチオピア": {
@@ -199,9 +205,9 @@
    "香り": 4
   },
   "flavor": {
-   "浅煎り": "カモミールティーとナッツのまろやかさ",
-   "中煎り": "ストーンフルーツの甘さとカカオの余韻",
-   "深煎り": "ダークチョコにカシスをひとさじ"
+   "浅煎り": "カモミールティーと<wbr>ナッツの<wbr>まろやかさ",
+   "中煎り": "ストーンフルーツの<wbr>甘さと<wbr>カカオの<wbr>余韻",
+   "深煎り": "ダークチョコに<wbr>カシスを<wbr>ひとさじ"
   }
  },
  "ブラジル": {
@@ -216,9 +222,9 @@
    "香り": 4
   },
   "flavor": {
-   "浅煎り": "赤い実の風味と青パパイヤの個性",
-   "中煎り": "チェリーと蜂蜜、ずっしりした果実の甘み",
-   "深煎り": "チョコレートのリッチなコク"
+   "浅煎り": "赤い実の<wbr>風味と<wbr>青パパイヤの<wbr>個性",
+   "中煎り": "チェリーと<wbr>蜂蜜、<wbr>ずっしりした<wbr>果実の<wbr>甘み",
+   "深煎り": "チョコレートの<wbr>リッチな<wbr>コク"
   }
  },
  "PNG": {
@@ -233,9 +239,9 @@
    "香り": 4
   },
   "flavor": {
-   "浅煎り": "レモンキャンディーの香りとまろやかな口当たり",
-   "中煎り": "オレンジピールのビターさとジューシーさ",
-   "深煎り": "フローラルな印象と黒糖飴のような甘み"
+   "浅煎り": "レモンキャンディーの<wbr>香りと<wbr>まろやかな<wbr>口当たり",
+   "中煎り": "オレンジピールの<wbr>ビターさと<wbr>ジューシーさ",
+   "深煎り": "フローラルな<wbr>印象と<wbr>黒糖飴のような<wbr>甘み"
   }
  },
  "ケニア": {
@@ -250,9 +256,9 @@
    "香り": 4
   },
   "flavor": {
-   "浅煎り": "グリーンティーの爽やかさとライムのニュアンス",
-   "中煎り": "シトラスとベッコウ飴、紅茶のような上品さ",
-   "深煎り": "ダークチョコと焦がしキャラメルの余韻"
+   "浅煎り": "グリーンティーの<wbr>爽やかさと<wbr>ライムの<wbr>ニュアンス",
+   "中煎り": "シトラスと<wbr>ベッコウ飴、<wbr>紅茶のような<wbr>上品さ",
+   "深煎り": "ダークチョコと<wbr>焦が<wbr>しキャラメルの<wbr>余韻"
   }
  },
  "コロンビア": {
@@ -267,9 +273,9 @@
    "香り": 3
   },
   "flavor": {
-   "浅煎り": "甘いナッツとキャラメル、青りんごの後味",
-   "中煎り": "濃いめの紅茶のような華やかさと飴の甘さ",
-   "深煎り": "ダークチョコのコクと力強い甘み"
+   "浅煎り": "甘い<wbr>ナッツと<wbr>キャラメル、<wbr>青りんごの<wbr>後味",
+   "中煎り": "濃いめの<wbr>紅茶のような<wbr>華やかさと<wbr>飴の<wbr>甘さ",
+   "深煎り": "ダークチョコの<wbr>コクと<wbr>力強い<wbr>甘み"
   }
  }
 };
@@ -279,98 +285,98 @@
  "can|noacid": [
   "グアテマラ",
   "深煎り",
-  "ダークチョコのようなほろ苦さと、すっきりした後味。酸味はほとんど感じません。",
+  "ダークチョコのような<wbr>ほろ<wbr>苦さと、<wbr>すっきりした<wbr>後味。<wbr>酸味は<wbr>ほとんど<wbr>感じません。",
   "コロンビア",
   "深煎り",
-  "同じ深煎りでも、こちらは力強い甘み。並べて飲むと違いがはっきりします。"
+  "同じ<wbr>深煎りでも、<wbr>こちらは<wbr>力強い<wbr>甘み。<wbr>並べて<wbr>飲むと<wbr>違いが<wbr>はっきりします。"
  ],
  "can|nobitter": [
   "ブラジル",
   "中煎り",
-  "チェリーと蜂蜜のような甘み。苦味がやわらかく、しっかりした味が好きな方の入口です。",
+  "チェリーと<wbr>蜂蜜のような<wbr>甘み。<wbr>苦味が<wbr>やわらかく、<wbr>しっかりした味が<wbr>好きな<wbr>方の<wbr>入口です。",
   "PNG",
   "中煎り",
-  "オレンジピールのほろ苦さとジューシーさ。甘さの方向性の違いを楽しめます。"
+  "オレンジピールの<wbr>ほろ<wbr>苦さと<wbr>ジューシーさ。<wbr>甘さの<wbr>方向性の<wbr>違いを<wbr>楽しめます。"
  ],
  "can|any": [
   "グアテマラ",
   "中煎り",
-  "明るい酸味と苦味のバランスがよく、キャラメルのような甘さ。毎日飲んでも飽きません。",
+  "明る<wbr>い<wbr>酸味と<wbr>苦味の<wbr>バランスが<wbr>よく、<wbr>キャラメルのような<wbr>甘さ。<wbr>毎日<wbr>飲んでも<wbr>飽きません。",
   "タイ",
   "深煎り",
-  "ウッディな香ばしさが個性的。香ばしい風味が好きな方に響きます。"
+  "ウッディな<wbr>香ばしさが<wbr>個性的。<wbr>香ばしい<wbr>風味が<wbr>好きな<wbr>方に<wbr>響きます。"
  ],
  "cafe|noacid": [
   "ケニア",
   "深煎り",
-  "ダークチョコのコクに焦がしキャラメルの甘さ。余韻が長く、飲みごたえがあります。",
+  "ダークチョコの<wbr>コクに<wbr>焦が<wbr>しキャラメルの<wbr>甘さ。<wbr>余韻が<wbr>長く、<wbr>飲みごたえが<wbr>あります。",
   "コロンビア",
   "中煎り",
-  "濃いめの紅茶のような華やかさ。中煎りでも重厚感があります。"
+  "濃いめの<wbr>紅茶のような<wbr>華やかさ。<wbr>中煎りでも<wbr>重厚感が<wbr>あります。"
  ],
  "cafe|nobitter": [
   "エチオピア",
   "中煎り",
-  "ネクタリンを煮詰めたような甘さとカカオの余韻。苦味がとても穏やかです。",
+  "ネクタリンを<wbr>煮詰めたような<wbr>甘さと<wbr>カカオの<wbr>余韻。<wbr>苦味が<wbr>とても<wbr>穏やかです。",
   "PNG",
   "浅煎り",
-  "レモンキャンディーのような香り。軽やかで、浅煎りの入口にちょうどよい一杯です。"
+  "レモンキャンディーのような<wbr>香り。<wbr>軽やかで、<wbr>浅煎りの<wbr>入口に<wbr>ちょうどよい<wbr>一杯です。"
  ],
  "cafe|any": [
   "ケニア",
   "中煎り",
-  "シトラスとベッコウ飴の甘さ、紅茶のような上品さ。豆の個性を味わいたい方に。",
+  "シトラスと<wbr>ベッコウ飴の<wbr>甘さ、<wbr>紅茶のような<wbr>上品さ。<wbr>豆の<wbr>個性を<wbr>味わいたい方に。",
   "タイ",
   "中煎り",
-  "クリーンで後を引く甘みと明るい酸味。産地による違いがよく分かります。"
+  "クリーンで<wbr>後を<wbr>引く<wbr>甘みと<wbr>明る<wbr>い<wbr>酸味。<wbr>産地に<wbr>よる<wbr>違いが<wbr>よく<wbr>分かります。"
  ],
  "mild|noacid": [
   "ブラジル",
   "中煎り",
-  "当店でいちばん甘く、酸味がおだやか。コーヒーが苦手な方にも好評です。",
+  "当店で<wbr>いちばん甘く、<wbr>酸味が<wbr>おだやか。<wbr>コーヒーが<wbr>苦手な<wbr>方にも<wbr>好評です。",
   "グアテマラ",
   "中煎り",
-  "バランス型で飲み疲れしにくい一杯。次の一歩にちょうどよい豆です。"
+  "バランス型で<wbr>飲み疲れしに<wbr>くい一杯。<wbr>次の<wbr>一歩に<wbr>ちょうどよい豆です。"
  ],
  "mild|nobitter": [
   "PNG",
   "中煎り",
-  "まろやかな口当たりとジューシーな甘さ。苦味がとても少ない一杯です。",
+  "まろやかな<wbr>口当たりと<wbr>ジューシーな<wbr>甘さ。<wbr>苦味が<wbr>とても<wbr>少ない<wbr>一杯です。",
   "エチオピア",
   "浅煎り",
-  "カモミールティーとナッツのような、やさしい香り。軽やかさを試すならこちら。"
+  "カモミールティーと<wbr>ナッツのような、<wbr>やさしい<wbr>香り。<wbr>軽やかさを<wbr>試すなら<wbr>こちら。"
  ],
  "mild|any": [
   "コロンビア",
   "中煎り",
-  "紅茶のような華やかさと飴の甘さ。クセがなく、はじめの一杯に向いています。",
+  "紅茶のような<wbr>華やかさと<wbr>飴の<wbr>甘さ。<wbr>クセが<wbr>なく、<wbr>はじめの<wbr>一杯に<wbr>向いています。",
   "ブラジル",
   "浅煎り",
-  "赤い実のような果実感。浅煎りならではの明るさを体験できます。"
+  "赤い実のような<wbr>果実感。<wbr>浅煎りならではの<wbr>明るさを<wbr>体験できます。"
  ]
 };
   var SET_ID = "150239614";
   function setBox(n1, n2){
     return '<div class="setbox">'+
-      '<p>2種類を飲み比べるなら、<br><b class="nb">「自由に選べる2袋セット」</b>が便利です。<br>単品で買うより<b>おトク</b>になります。</p>'+
-      '<a class="btn" href="'+SHOP+'/items/'+SET_ID+'">2袋セットを見る</a>'+
+      '<p>2種類を<wbr>飲み<wbr>比べるなら、<br><b class="nb">「自由に<wbr>選べる<wbr>2袋セット」</b>が<wbr>便利です。<wbr>単品で<wbr>買うより<b>おトク</b>に<wbr>なります。</p>'+
+      '<a class="btn" href="'+SHOP+'/items/'+SET_ID+'">2袋セットを<wbr>見る</a>'+
     '</div>';
   }
 
   var QS = [
-    {q:"普段よく飲むコーヒーは？", opts:[
-      {t:"缶コーヒーやインスタント", s:"香ばしくて、しっかりした味が好み", v:"can"},
-      {t:"カフェで飲むブラック", s:"ふだんから豆の違いを楽しんでいる", v:"cafe"},
-      {t:"あまり飲まない／ミルクや砂糖を入れる", s:"苦いのはちょっと苦手かも", v:"mild"}
+    {q:"普段よく<wbr>飲む<wbr>コーヒーは？", opts:[
+      {t:"缶コーヒーや<wbr>インスタント", s:"香ばしくて、<wbr>しっかりした味が<wbr>好み", v:"can"},
+      {t:"カフェで<wbr>飲むブラック", s:"ふだんから<wbr>豆の<wbr>違いを<wbr>楽しんでいる", v:"cafe"},
+      {t:"あまり<wbr>飲まない<wbr>／ミルクや<wbr>砂糖を<wbr>入れる", s:"苦いのは<wbr>ちょっと<wbr>苦手かも", v:"mild"}
     ]},
-    {q:"苦手な味はありますか？", opts:[
-      {t:"酸っぱいのが苦手", s:"すっきりよりコク重視", v:"noacid"},
-      {t:"苦いのが苦手", s:"軽やかで飲みやすいものを", v:"nobitter"},
-      {t:"特にありません", s:"いろいろ試してみたい", v:"any"}
+    {q:"苦手な<wbr>味は<wbr>ありますか？", opts:[
+      {t:"酸っぱいのが<wbr>苦手", s:"すっきりより<wbr>コク重視", v:"noacid"},
+      {t:"苦いのが<wbr>苦手", s:"軽やかで<wbr>飲みやすい<wbr>ものを", v:"nobitter"},
+      {t:"特に<wbr>ありません", s:"いろいろ試してみたい", v:"any"}
     ]},
-    {q:"ご自宅にコーヒーミルはありますか？", opts:[
-      {t:"ある", s:"挽きたての香りを楽しめます", v:"mill"},
-      {t:"ない・わからない", s:"こちらで挽いてお届けします", v:"nomill"}
+    {q:"ご自宅に<wbr>コーヒーミルは<wbr>ありますか？", opts:[
+      {t:"ある", s:"挽きたての<wbr>香りを<wbr>楽しめます", v:"mill"},
+      {t:"ない<wbr>・わからない", s:"こちらで<wbr>挽いてお届けします", v:"nomill"}
     ]}
   ];
 
@@ -382,15 +388,15 @@
   function renderQ(){
     var d = QS[step];
     $("qnum").textContent = "QUESTION " + (step+1);
-    $("qtext").textContent = d.q;
+    $("qtext").innerHTML = d.q;   // 文節の <wbr> を活かすため innerHTML
     [].forEach.call($("prog").children, function(el,i){ el.classList.toggle("on", i<=step); });
     var box = $("opts"); box.innerHTML = "";
     d.opts.forEach(function(o){
       var b = document.createElement("button");
       b.className = "opt"; b.type = "button";
       b.innerHTML = "<b></b><span></span>";
-      b.querySelector("b").textContent = o.t;
-      b.querySelector("span").textContent = o.s;
+      b.querySelector("b").innerHTML = o.t;
+      b.querySelector("span").innerHTML = o.s;
       b.addEventListener("click", function(){
         ans[step] = o.v; step++;
         if(step < QS.length){ renderQ(); } else { showResult(); }
@@ -437,34 +443,35 @@
   }
 
   function showResult(){
-    var m = MAP[ans[0] + "|" + ans[1]] || ["ブラジル","中煎り","甘みがあって飲みやすい、当店の定番です。","グアテマラ","中煎り","バランス型で飲み疲れしにくい一杯です。"];
+    var m = MAP[ans[0] + "|" + ans[1]] || ["ブラジル","中煎り","甘みが<wbr>あって<wbr>飲みやすい、<wbr>当店の<wbr>定番です。","グアテマラ","中煎り","バランス型で<wbr>飲み疲れしに<wbr>くい一杯です。"];
     var n1=m[0], r1=m[1], why1=m[2], n2=m[3], r2=m[4], why2=m[5];
     var b1 = BEANS[n1], b2 = BEANS[n2];
 
     var grind = ans[2] === "mill"
-      ? ['豆のまま', 'ミルがあるとのことなので<br><b class="nb">「豆のまま」</b>がおすすめです。<br>淹れる直前に挽くと香りが際立ちます。']
-      : ['ペーパーフィルター用', 'ミルがなくても大丈夫です。<br>ご注文時に<b class="nb">「ペーパーフィルター用」</b>を<br>お選びいただければ、こちらで挽きます。'];
+      ? ['豆のまま', 'ミルが<wbr>あるとの<wbr>ことなので<b class="nb">「豆の<wbr>まま」</b>が<wbr>おすすめです。<wbr>淹れる<wbr>直前に<wbr>挽くと<wbr>香りが<wbr>際立ちます。']
+      : ['ペーパーフィルター用', 'ミルが<wbr>なくても<wbr>大丈夫です。<wbr>ご注文時に<b class="nb">「ペーパーフィルター用」</b>を<wbr>お選びいただければ、<wbr>こちらで<wbr>挽いてお届けします。'];
 
+    // 本文は <wbr> 入りのHTMLなので esc は通さない（データはビルド時に生成した固定値）
     $("result").innerHTML =
       '<p class="sec-label">RECOMMENDED FOR YOU</p>'+
       '<div class="res-head">'+
         '<p class="res-eyebrow">1st CUP</p>'+
         '<p class="res-en">'+esc(b1.en)+'</p>'+
-        '<p class="res-jp">'+esc(b1.jp)+'</p>'+
+        '<p class="res-jp">'+b1.jp+'</p>'+
         '<div class="res-badge">'+esc(r1)+'</div>'+
       '</div>'+
       '<div class="res-body">'+
         radarSVG(adjTaste(b1,r1), "#B0641F")+
-        '<p class="flavor">'+esc(b1.flavor[r1])+'</p>'+
-        '<p class="why">'+esc(why1)+'</p>'+
+        '<p class="flavor">'+b1.flavor[r1]+'</p>'+
+        '<p class="why">'+why1+'</p>'+
         '<div class="spec">'+
           '<span class="chip"><b>内容量</b> 100g</span>'+
           '<span class="chip"><b>おすすめ湯温</b> '+TEMP[r1]+'℃</span>'+
           '<span class="chip"><b>豆の状態</b> '+grind[0]+'</span>'+
         '</div>'+
         '<p class="grind">'+grind[1]+'</p>'+
-        '<p class="grind">商品ページで<b class="nb">「'+esc(r1)+'」</b>と<b class="nb">「'+grind[0]+'」</b>を<br>お選びください。</p>'+
-        '<div class="cta"><a class="btn amber" href="'+itemUrl(b1)+'">この豆を見る（ショップへ）</a></div>'+
+        '<p class="grind">商品ページで<b class="nb">「'+esc(r1)+'」</b>と<b class="nb">「'+grind[0]+'」</b>を<wbr>お選びください。</p>'+
+        '<div class="cta"><a class="btn amber" href="'+itemUrl(b1)+'">この<wbr>豆を<wbr>見る<wbr>（ショップへ）</a></div>'+
       '</div>'+
 
       '<p class="sec-label">もう一杯えらぶなら</p>'+
@@ -473,18 +480,18 @@
           '<p class="alt-en">'+esc(b2.en)+'</p>'+
           '<span class="alt-badge">'+esc(r2)+'</span>'+
         '</div>'+
-        '<p class="alt-jp">'+esc(b2.jp)+'</p>'+
-        '<p class="alt-flavor">'+esc(b2.flavor[r2])+'</p>'+
-        '<p class="alt-why">'+esc(why2)+'</p>'+
-        '<a class="btn ghost sm" href="'+itemUrl(b2)+'">この豆を見る</a>'+
+        '<p class="alt-jp">'+b2.jp+'</p>'+
+        '<p class="alt-flavor">'+b2.flavor[r2]+'</p>'+
+        '<p class="alt-why">'+why2+'</p>'+
+        '<a class="btn ghost sm" href="'+itemUrl(b2)+'">この<wbr>豆を<wbr>見る</a>'+
       '</div>'+
 
       setBox(n1, n2)+
 
       '<div class="cta" style="margin-top:16px">'+
-        '<button class="btn ghost" type="button" id="again">もう一度診断する</button>'+
+        '<button class="btn ghost" type="button" id="again">もう<wbr>一度<wbr>診断する</button>'+
       '</div>'+
-      '<p class="note">お届けまで、最長2週間ほど<br>お時間をいただく場合がございます。</p>';
+      '<p class="note">お届けまで、<wbr>最長2週間ほど<wbr>お時間を<wbr>いただく<wbr>場合が<wbr>ございます。</p>';
 
     $("quiz").classList.add("hide");
     $("result").classList.remove("hide");
