@@ -383,7 +383,7 @@
   var ans = [], step = 0;
   var $ = function(id){ return document.getElementById(id); };
   var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
-  var itemUrl = function(b){ return SHOP + (MODE==="libecity" ? "/products/" : "/items/") + b.id; };
+  var itemUrl = function(b){ return SHOP + (MODE==="mall" ? "/products/" : "/items/") + b.id; };
 
   function renderQ(){
     var d = QS[step];
