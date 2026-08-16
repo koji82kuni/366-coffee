@@ -5,11 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no">
 <meta name="theme-color" content="#F6F0E6">
+<meta name="robots" content="noindex, nofollow">
 <meta name="description" content="3つの質問で、あなたに合うコーヒーが見つかります。沖縄の手廻し焙煎 366 Coffee Roaster の無料診断。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="あなたに合う一杯は？｜366 Coffee Roaster">
 <meta property="og:description" content="3つの質問で、あなたに合うコーヒーが見つかります。沖縄の手廻し焙煎 366 Coffee Roaster の無料診断。">
-<meta property="og:url" content="https://koji82kuni.github.io/366-coffee/libecity/">
+<meta property="og:url" content="https://koji82kuni.github.io/366-coffee/quiz/">
 <meta property="og:site_name" content="366 Coffee Roaster">
 <meta name="twitter:card" content="summary">
 <title>あなたに合う一杯は？｜366 Coffee Roaster</title>
@@ -157,7 +158,7 @@
 <script>
 (function(){
   var SHOP = "https://ichiba.libecity.com";
-  var MODE = "libecity";
+  var MODE = "mall";
   var BEANS = {
  "タイ": {
   "en": "THAILAND",
@@ -396,7 +397,7 @@
   var ans = [], step = 0;
   var $ = function(id){ return document.getElementById(id); };
   var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); };
-  var itemUrl = function(b){ return SHOP + (MODE==="libecity" ? "/products/" : "/items/") + b.id; };
+  var itemUrl = function(b){ return SHOP + (MODE==="mall" ? "/products/" : "/items/") + b.id; };
 
   function renderQ(){
     var d = QS[step];
