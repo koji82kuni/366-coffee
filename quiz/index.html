@@ -160,23 +160,6 @@
   var SHOP = "https://ichiba.libecity.com";
   var MODE = "mall";
   var BEANS = {
- "タイ": {
-  "en": "THAILAND",
-  "jp": "タイ ドイサケット",
-  "id": "01KN1NJS1FJWRGA2PK9VS3EN9A",
-  "taste": {
-   "酸味": 3,
-   "甘み": 3,
-   "コク": 3,
-   "苦味": 3,
-   "香り": 3
-  },
-  "flavor": {
-   "浅煎り": "ハーブと<wbr>ライチ、<wbr>まとまりの<wbr>ある<wbr>甘さ",
-   "中煎り": "クリーンで<wbr>後を<wbr>引く<wbr>甘みと<wbr>明る<wbr>い<wbr>酸味",
-   "深煎り": "ウッディな<wbr>香ばしさと<wbr>ほのかな<wbr>酸味"
-  }
- },
  "グアテマラ": {
   "en": "GUATEMALA",
   "jp": "グアテマラ フライハーネス",
@@ -303,9 +286,9 @@
   "グアテマラ",
   "中煎り",
   "明る<wbr>い<wbr>酸味と<wbr>苦味の<wbr>バランスが<wbr>よく、<wbr>キャラメルのような<wbr>甘さ。<wbr>毎日<wbr>飲んでも<wbr>飽きません。",
-  "タイ",
+  "ケニア",
   "深煎り",
-  "ウッディな<wbr>香ばしさが<wbr>個性的。<wbr>香ばしい<wbr>風味が<wbr>好きな<wbr>方に<wbr>響きます。"
+  "ダークチョコの<wbr>コクに<wbr>焦が<wbr>しキャラメルの<wbr>甘さ。<wbr>香ばしさが<wbr>好きな<wbr>方に<wbr>響きます。"
  ],
  "cafe|noacid": [
   "ケニア",
@@ -327,9 +310,9 @@
   "ケニア",
   "中煎り",
   "シトラスと<wbr>ベッコウ飴の<wbr>甘さ、<wbr>紅茶のような<wbr>上品さ。<wbr>豆の<wbr>個性を<wbr>味わいたい方に。",
-  "タイ",
-  "中煎り",
-  "クリーンで<wbr>後を<wbr>引く<wbr>甘みと<wbr>明る<wbr>い<wbr>酸味。<wbr>産地に<wbr>よる<wbr>違いが<wbr>よく<wbr>分かります。"
+  "エチオピア",
+  "深煎り",
+  "ダークチョコに<wbr>カシスを<wbr>ひとさじ。<wbr>同じ<wbr>深煎りでも<wbr>果実感が<wbr>しっかり<wbr>残ります。"
  ],
  "mild|noacid": [
   "ブラジル",
@@ -356,7 +339,7 @@
   "赤い実のような<wbr>果実感。<wbr>浅煎りならではの<wbr>明るさを<wbr>体験できます。"
  ]
 };
-  var SETS = {"teiban": {"id": "01KX8QN0N3WNTNECWSY13PABFG", "name": "定番2袋セット", "price": "¥1,700", "beans": ["タイ", "グアテマラ", "エチオピア"]}, "kodawari": {"id": "01KX877VX3JF69VHK6PBME1R48", "name": "こだわり2袋セット", "price": "¥2,000", "beans": ["コロンビア", "ケニア", "ブラジル", "PNG"]}};
+  var SETS = {"teiban": {"id": "01KX8QN0N3WNTNECWSY13PABFG", "name": "定番2袋セット", "price": "¥1,700", "beans": ["グアテマラ", "エチオピア"]}, "kodawari": {"id": "01KX877VX3JF69VHK6PBME1R48", "name": "こだわり2袋セット", "price": "¥2,000", "beans": ["コロンビア", "ケニア", "ブラジル", "PNG"]}};
   function groupOf(n){
     for(var k in SETS){ if(SETS[k].beans.indexOf(n)>=0) return k; }
     return null;
@@ -366,12 +349,12 @@
     if(g1 && g1===g2){
       var s=SETS[g1];
       return '<div class="setbox">'+
-        '<p>この<wbr>2種類は<br><b class="nb">「'+s.name+'」</b>で<wbr>まとめて<wbr>選べます。<wbr>単品で<wbr>買うより<b>おトク</b>です<span class="nb">（'+s.price+'・送料込）</span>。</p>'+
+        '<p>この<wbr>2種類は<br><b class="nb">「'+s.name+'」</b>'+(s.beans.length<=2?'に<wbr>そのまま<wbr>入っています。<wbr>単品で<wbr>買うより':'で<wbr>まとめて<wbr>選べます。<wbr>単品で<wbr>買うより')+'<b>おトク</b>です<span class="nb">（'+s.price+'・送料込）</span>。</p>'+
         '<a class="btn" href="'+SHOP+'/products/'+s.id+'">'+s.name+'を見る</a>'+
       '</div>';
     }
     return '<div class="setbox">'+
-      '<p>2種類を<wbr>飲み<wbr>比べるなら、<br><b>飲み<wbr>比べセット</b>も<wbr>おすすめです。<wbr>同じ<wbr>セット内の<b>2種</b>を<wbr>お選びいただけます。</p>'+
+      '<p>2種類を<wbr>飲み<wbr>比べるなら、<br><b>飲み<wbr>比べセット</b>も<wbr>おすすめです。<wbr>いずれも<b>2袋</b>入りで、<wbr>送料込みです。</p>'+
       '<a class="btn" href="'+SHOP+'/products/'+SETS.teiban.id+'">定番2袋セットを<wbr>見る</a>'+
       '<a class="btn ghost" href="'+SHOP+'/products/'+SETS.kodawari.id+'">こだわり2袋セットを<wbr>見る</a>'+
     '</div>';
