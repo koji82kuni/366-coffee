@@ -107,9 +107,8 @@
      改行させる。これで「カカ／オ」のような単語の分断が起きなくなる。
      break-word は、1文節が行幅に収まらない極端な場合だけの保険。 */
   .wrap{ word-break:keep-all; overflow-wrap:break-word; line-break:strict; }
-  /* 行末に1〜2文字だけ残るのを防ぐ */
-  .wrap p, .wrap .flavor, .wrap .why, .wrap .alt-why, .wrap .grind,
-  .wrap .note, .wrap footer, .wrap .setbox p, .wrap .lead{ text-wrap:pretty; }
+  /* ⚠️ text-wrap:pretty は使わない（2026-09-29）。iPhoneのSafariで <wbr> と組み合わさると
+     「ミルがあるとの／あるとの／ことなので」のように文字が二重に描かれる不具合が出た。 */
   /* 短文は行数を均等に割る */
   .wrap h1, .wrap .q, .wrap .flavor, .wrap .alt-flavor,
   .wrap .why, .wrap .alt-why{ text-wrap:balance; }
@@ -173,7 +172,7 @@
   },
   "flavor": {
    "浅煎り": "シトラスの<wbr>酸味と<wbr>烏龍茶のような<wbr>深み",
-   "中煎り": "レモンピールの<wbr>苦みと<wbr>明る<wbr>い<wbr>酸味",
+   "中煎り": "レモンピールの<wbr>苦みと<wbr>明るい<wbr>酸味",
    "深煎り": "ダークチョコレートの<wbr>ビターな<wbr>味わい"
   }
  },
@@ -189,9 +188,9 @@
    "香り": 3
   },
   "flavor": {
-   "浅煎り": "みかんの<wbr>明る<wbr>い<wbr>酸味と<wbr>ナッツの<wbr>甘い<wbr>余韻",
+   "浅煎り": "みかんの<wbr>明るい<wbr>酸味と<wbr>ナッツの<wbr>甘い<wbr>余韻",
    "中煎り": "酸味と<wbr>苦味の<wbr>バランス、<wbr>キャラメルの<wbr>甘さ",
-   "深煎り": "ダークチョコの<wbr>ほろ<wbr>苦さと<wbr>すっきりした<wbr>後味"
+   "深煎り": "ダークチョコの<wbr>ほろ苦さと<wbr>すっきりした<wbr>後味"
   }
  },
  "エチオピア": {
@@ -259,24 +258,7 @@
   "flavor": {
    "浅煎り": "グリーンティーの<wbr>爽やかさと<wbr>ライムの<wbr>ニュアンス",
    "中煎り": "シトラスと<wbr>ベッコウ飴、<wbr>紅茶のような<wbr>上品さ",
-   "深煎り": "ダークチョコと<wbr>焦が<wbr>しキャラメルの<wbr>余韻"
-  }
- },
- "コロンビア": {
-  "en": "COLOMBIA",
-  "jp": "コロンビア シエラネバダ",
-  "id": "01KRV4Q7GT27JP00T9YT3G19NT",
-  "taste": {
-   "酸味": 3,
-   "甘み": 4,
-   "コク": 3,
-   "苦味": 3,
-   "香り": 3
-  },
-  "flavor": {
-   "浅煎り": "甘い<wbr>ナッツと<wbr>キャラメル、<wbr>青りんごの<wbr>後味",
-   "中煎り": "濃いめの<wbr>紅茶のような<wbr>華やかさと<wbr>飴の<wbr>甘さ",
-   "深煎り": "ダークチョコの<wbr>コクと<wbr>力強い<wbr>甘み"
+   "深煎り": "ダークチョコと<wbr>焦がしキャラメルの<wbr>余韻"
   }
  }
 };
@@ -286,10 +268,10 @@
  "can|noacid": [
   "グアテマラ",
   "深煎り",
-  "ダークチョコのような<wbr>ほろ<wbr>苦さと、<wbr>すっきりした<wbr>後味。<wbr>酸味は<wbr>ほとんど<wbr>感じません。",
-  "コロンビア",
+  "ダークチョコのような<wbr>ほろ苦さと、<wbr>すっきりした<wbr>後味。<wbr>酸味は<wbr>ほとんど<wbr>感じません。",
+  "エチオピア",
   "深煎り",
-  "同じ<wbr>深煎りでも、<wbr>こちらは<wbr>力強い<wbr>甘み。<wbr>並べて<wbr>飲むと<wbr>違いが<wbr>はっきりします。"
+  "ダークチョコに<wbr>カシスを<wbr>ひとさじ。<wbr>同じ<wbr>深煎りでも<wbr>果実感が<wbr>残り、<wbr>並べて<wbr>飲むと<wbr>違いが<wbr>はっきりします。"
  ],
  "can|nobitter": [
   "ブラジル",
@@ -297,12 +279,12 @@
   "ローストナッツと<wbr>チョコレートのような<wbr>甘み。<wbr>苦味が<wbr>やわらかく、<wbr>しっかりした味が<wbr>好きな<wbr>方の<wbr>入口です。",
   "PNG",
   "中煎り",
-  "オレンジピールの<wbr>ほろ<wbr>苦さと<wbr>ジューシーさ。<wbr>甘さの<wbr>方向性の<wbr>違いを<wbr>楽しめます。"
+  "オレンジピールの<wbr>ほろ苦さと<wbr>ジューシーさ。<wbr>甘さの<wbr>方向性の<wbr>違いを<wbr>楽しめます。"
  ],
  "can|any": [
   "グアテマラ",
   "中煎り",
-  "明る<wbr>い<wbr>酸味と<wbr>苦味の<wbr>バランスが<wbr>よく、<wbr>キャラメルのような<wbr>甘さ。<wbr>毎日<wbr>飲んでも<wbr>飽きません。",
+  "明るい<wbr>酸味と<wbr>苦味の<wbr>バランスが<wbr>よく、<wbr>キャラメルのような<wbr>甘さ。<wbr>毎日<wbr>飲んでも<wbr>飽きません。",
   "タイ",
   "深煎り",
   "ダークチョコレートの<wbr>ビターに、<wbr>ミルクのような<wbr>まろやかさ。<wbr>飲みごたえが<wbr>あります。"
@@ -310,10 +292,10 @@
  "cafe|noacid": [
   "ケニア",
   "深煎り",
-  "ダークチョコの<wbr>コクに<wbr>焦が<wbr>しキャラメルの<wbr>甘さ。<wbr>余韻が<wbr>長く、<wbr>飲みごたえが<wbr>あります。",
-  "コロンビア",
+  "ダークチョコの<wbr>コクに<wbr>焦がしキャラメルの<wbr>甘さ。<wbr>余韻が<wbr>長く、<wbr>飲みごたえが<wbr>あります。",
+  "ブラジル",
   "中煎り",
-  "濃いめの<wbr>紅茶のような<wbr>華やかさ。<wbr>中煎りでも<wbr>重厚感が<wbr>あります。"
+  "ローストナッツと<wbr>チョコレートのような<wbr>甘み。<wbr>酸味が<wbr>おだやかで、<wbr>深煎りの<wbr>ケニアとは<wbr>違うやさしさです。"
  ],
  "cafe|nobitter": [
   "エチオピア",
@@ -348,17 +330,17 @@
   "カモミールティーと<wbr>ナッツのような、<wbr>やさしい<wbr>香り。<wbr>軽やかさを<wbr>試すなら<wbr>こちら。"
  ],
  "mild|any": [
-  "コロンビア",
+  "グアテマラ",
   "中煎り",
-  "紅茶のような<wbr>華やかさと<wbr>飴の<wbr>甘さ。<wbr>クセが<wbr>なく、<wbr>はじめの<wbr>一杯に<wbr>向いています。",
+  "酸味と<wbr>苦味の<wbr>バランスが<wbr>よく、<wbr>キャラメルのような<wbr>甘さ。<wbr>クセが<wbr>なく、<wbr>はじめの<wbr>一杯に<wbr>向いています。",
   "ブラジル",
   "浅煎り",
   "甘い<wbr>香りと<wbr>ナッツの<wbr>風味。<wbr>あっさりした<wbr>口当たりで、<wbr>軽やかさを<wbr>試すなら<wbr>こちら。"
  ]
 };
-  var SETS = {"teiban": {"id": "01KX8QN0N3WNTNECWSY13PABFG", "name": "定番2袋セット", "price": "¥1,700", "beans": ["グアテマラ", "エチオピア", "ブラジル"]}, "kodawari": {"id": "01KX877VX3JF69VHK6PBME1R48", "name": "こだわり2袋セット", "price": "¥2,000", "beans": ["コロンビア", "ケニア", "PNG"]}};
+  var SETS = {"teiban": {"id": "01KX8QN0N3WNTNECWSY13PABFG", "name": "定番2袋セット", "price": "¥1,700", "beans": ["グアテマラ", "エチオピア", "ブラジル"]}, "kodawari": {"id": "01KX877VX3JF69VHK6PBME1R48", "name": "こだわり2袋セット", "price": "¥2,000", "beans": ["ケニア", "PNG"], "paused": true}};
   function groupOf(n){
-    for(var k in SETS){ if(SETS[k].beans.indexOf(n)>=0) return k; }
+    for(var k in SETS){ if(!SETS[k].paused && SETS[k].beans.indexOf(n)>=0) return k; }
     return null;
   }
   function setBox(n1, n2){
@@ -371,9 +353,11 @@
       '</div>';
     }
     return '<div class="setbox">'+
-      '<p>2種類を<wbr>飲み<wbr>比べるなら、<br><b>飲み<wbr>比べセット</b>も<wbr>おすすめです。<wbr>いずれも<b>2袋</b>入りで、<wbr>送料込みです。</p>'+
+      (SETS.kodawari.paused
+        ? '<p>2種類を<wbr>飲み<wbr>比べるなら、<br><b class="nb">「定番2袋セット」</b>も<wbr>おすすめです。<b>2袋</b>入りで、<wbr>送料込みです。</p>'
+        : '<p>2種類を<wbr>飲み<wbr>比べるなら、<br><b>飲み<wbr>比べセット</b>も<wbr>おすすめです。<wbr>いずれも<b>2袋</b>入りで、<wbr>送料込みです。</p>')+
       '<a class="btn" href="'+SHOP+'/products/'+SETS.teiban.id+'">定番2袋セットを<wbr>見る</a>'+
-      '<a class="btn ghost" href="'+SHOP+'/products/'+SETS.kodawari.id+'">こだわり2袋セットを<wbr>見る</a>'+
+      (SETS.kodawari.paused ? '' : '<a class="btn ghost" href="'+SHOP+'/products/'+SETS.kodawari.id+'">こだわり2袋セットを<wbr>見る</a>')+
     '</div>';
   }
 
